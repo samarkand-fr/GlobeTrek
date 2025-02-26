@@ -5,17 +5,114 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card-bg: #fff;
+  --card-text: #333;
 }
-
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #f5f5f5;
+    --card-bg: #1a1a1a;
+    --card-text: #e5e5e5;
   }
 }
 
+
+html {
+  scroll-behavior: smooth;
+}
 body {
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+/* globals.css */
+body {
+  @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply text-gray-900 dark:text-white;
+}
+
+p, span, li {
+  @apply text-gray-700 dark:text-gray-300;
+}
+a {
+  color: var(--foreground);
+  transition: color 0.2s;
+}
+a:hover {
+  color: #ffcc00; /* Accent color for links */
+}
+/* Parallax Zoom Effect */
+@keyframes zoomInEffect {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.1) translateY(-10px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.zoom-effect {
+  animation: zoomInEffect 8s ease-in-out infinite;
+}
+
+/* Slide-in Effects for Cards */
+@keyframes slideInLeft {
+  0% { transform: translateX(-50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  0% { transform: translateX(50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.animate-slideInLeft { animation: slideInLeft 1s ease-out forwards; }
+.animate-slideInRight { animation: slideInRight 1s ease-out forwards; }
+
+/* Card Styling */
+.cards-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+.cards-section .card {
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  padding: 20px;
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.8s, opacity 0.8s;
+}
+
+.cards-section .card.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.card h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.card p {
+  color: var(--card-text);
+  font-size: 1rem;
+}
+
+/* Button Styling */
+button {
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
