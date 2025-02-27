@@ -2,13 +2,14 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { blogPosts } from "../../../data/blogData"; 
+import GoUpButton from "../../../components/GoUpButton"; 
 
 interface BlogPageProps {
-  params: Promise<{ id: string }>; //  `params` est traité comme une promesse
+  params: Promise<{ id: string }>; // `params` is treated as a promise
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const resolvedParams = await params; // Résolution de la promesse
+  const resolvedParams = await params; // Resolve the promise
   const post = blogPosts.find((post) => post.id === resolvedParams.id);
 
   if (!post) {
@@ -48,6 +49,9 @@ export default async function BlogPage({ params }: BlogPageProps) {
           return null;
         })}
       </div>
+
+      {/* Go Up Button */}
+      <GoUpButton />
     </div>
   );
 }
