@@ -11,13 +11,18 @@ const BlogPostList = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // This code will run only on the client side
-      console.log("BlogPostList mounted. Current router path:", window.location.pathname);
+      console.log(
+        "BlogPostList mounted. Current router path:",
+        window.location.pathname
+      );
     }
   }, []);
 
   if (!blogPosts || blogPosts.length === 0) {
     console.warn("Aucun article trouvé dans blogPosts.");
-    return <p className="text-gray-600 text-center">Aucun article disponible.</p>;
+    return (
+      <p className="text-gray-600 text-center">Aucun article disponible.</p>
+    );
   }
 
   return (
@@ -44,22 +49,29 @@ const BlogPostList = () => {
           )}
 
           <div className="p-4">
-          <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{post.title}</h3>
-            <p className="text-gray-700 dark:text-gray-300 mb-4">{post.description}</p>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+              {post.title}
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              {post.description}
+            </p>
 
             {/* Articles recommandés */}
             {post.latestRead && post.latestRead.length > 0 && (
               <div className="mt-4">
-               <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200">You might also like</h4>
+                <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200">
+                  You might also like
+                </h4>
                 <ul className="space-y-2">
                   {post.latestRead.map((relatedPost, relIndex) => (
                     <li
                       key={`related-${relatedPost.id}-${relIndex}`}
-                      className="text-sm text-blue-500 hover:underline"
+                      className="text-sm"
                     >
                       <Link
                         href={`/blog/${relatedPost.id}`}
                         onClick={(e) => e.stopPropagation()} // Prevents parent div click
+                        className="text-cyan-600 hover:underline cursor-pointer transition-all duration-200 transform hover:scale-105"
                       >
                         {relatedPost.title}
                       </Link>
