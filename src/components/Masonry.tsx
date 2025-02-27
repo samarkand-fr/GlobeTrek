@@ -15,6 +15,12 @@ interface MasonryProps {
 
 function Masonry({ data }: MasonryProps) {
   const [columns, setColumns] = useState(2);
+  const [isClient, setIsClient] = useState(false); // State to track if client-side
+
+   // Ensure that the component only runs on the client side
+   useEffect(() => {
+    setIsClient(true); // Set to true only on the client side
+  }, []);
 
   useEffect(() => {
     const updateColumns = () => {
@@ -33,6 +39,20 @@ function Masonry({ data }: MasonryProps) {
     window.addEventListener('resize', updateColumns);
     return () => window.removeEventListener('resize', updateColumns);
   }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      if (ref.current) {
+        setWidth(ref.current.offsetWidth);
+      }
+    };
+
+    if (isClient) {
+      handleResize(); // Only run on client side
+      window.addEventListener('resize', handleResize);
+    }
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isClient]);
 
   const ref = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);

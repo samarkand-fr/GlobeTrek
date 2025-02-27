@@ -1,6 +1,4 @@
-
 "use client";
-
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -14,6 +12,13 @@ const Header = () => {
 
   // Function to check if a link is active
   const isActive = (path: string) => pathname === path;
+
+  const routes = [
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About" },
+    { path: "/blog", label: "Blog" },
+    { path: "/gallery", label: "Gallery" },
+  ];
 
   return (
     <header className="bg-amber-500 text-white p-4 shadow-md">
@@ -32,7 +37,7 @@ const Header = () => {
 
         {/* Navigation Links & ThemeSwitcher (Desktop) */}
         <div className="hidden lg:flex items-center space-x-6">
-          {["/", "/about", "/blog", "/gallery"].map((path) => (
+          {routes.map(({ path, label }) => (
             <Link 
               key={path}
               href={path}
@@ -40,7 +45,7 @@ const Header = () => {
                 isActive(path) ? "font-bold text-white" : "hover:text-amber-300"
               }`}
             >
-              {path === "/" ? "Home" : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+              {label}
             </Link>
           ))}
           <div className="ml-4"> 
@@ -52,6 +57,8 @@ const Header = () => {
         <button 
           className="lg:hidden p-2 rounded-md focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen ? "true" : "false"}
+          aria-label="Toggle navigation"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -60,7 +67,7 @@ const Header = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="lg:hidden flex flex-col items-center space-y-4 py-4 bg-amber-600">
-          {["/", "/about", "/blog", "/gallery"].map((path) => (
+          {routes.map(({ path, label }) => (
             <Link 
               key={path}
               href={path}
@@ -69,7 +76,7 @@ const Header = () => {
                 isActive(path) ? "font-bold text-white" : "hover:text-amber-300"
               }`}
             >
-              {path === "/" ? "Home" : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+              {label}
             </Link>
           ))}
           <div className="mt-2">

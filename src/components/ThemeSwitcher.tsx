@@ -16,18 +16,20 @@ const ThemeSwitcher = () => {
 
   const currentTheme = theme === "system" ? systemTheme : theme;
 
+  // Handle theme toggling
+  const handleThemeToggle = () => {
+    setTheme(currentTheme === "dark" ? "light" : "dark");
+  };
+
   return (
     <button
-      className="p-2  bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded"
-      onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+      aria-label={`Switch to ${currentTheme === "dark" ? "light" : "dark"} mode`}
+      className="p-2 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded transition-all duration-300"
+      onClick={handleThemeToggle}
     >
       {currentTheme === "dark" ? "✈️ Midnight Wanderer" : "🏝️ Sunny Voyager"}
-      {/* {currentTheme === "dark" ? "🌌 Night Explorer" : "🌞 Day Adventurer"} */}
-
-
     </button>
   );
 };
 
 export default ThemeSwitcher;
-

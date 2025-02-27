@@ -1,24 +1,6 @@
-// import React from 'react';
-// import Masonry from '../../components/Masonry'; // Adjust the path based on where the Masonry component is located
-// import {data} from "../../data/galleryData";
 
-// const Gallery: React.FC = () => {
-//   return (
-//     <div className="container mx-auto p-6">
-//       <h1 className="text-4xl font-extrabold text-center text-gray-800 dark:text-white mb-8">
-//         Photo Gallery
-//       </h1>
-//       <p className="text-lg text-center text-gray-600 dark:text-gray-300 mb-10">
-//         Explore stunning photos from around the world. Each picture tells a unique story.
-//       </p>
-//       <Masonry data={data} />
-//     </div>
-//   );
-// };
-
-// export default Gallery;
 import React from "react";
-import Masonry from "../../components/Masonry"; // Adjust the path if needed
+import Masonry from "../../components/Masonry"; 
 import { data } from "../../data/galleryData";
 
 const Gallery: React.FC = () => {

@@ -1,6 +1,5 @@
 
-'use client'
-// app/page.tsx
+'use client'; 
 import { useRef } from 'react';
 import HeroSection from '../components/HeroSection';
 import CardsSection from '../components/CardsSection';
@@ -27,12 +26,9 @@ const Home = () => {
       <div ref={cardsRef}>
         <CardsSection />
         <Testimonial />
-     
       </div>
     </div>
   );
 };
 
 export default Home;
-
-

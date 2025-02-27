@@ -1,7 +1,7 @@
-
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import PixelTransition from "./PixelTransition"; // Ensure this component is responsive
+import PixelTransition from "./PixelTransition";
 
 const HeroSection = ({ onScroll }: { onScroll: () => void }) => {
   const imageArray = [
@@ -13,10 +13,23 @@ const HeroSection = ({ onScroll }: { onScroll: () => void }) => {
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [windowWidth, setWindowWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 1024);
 
   const handleHover = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageArray.length);
   };
+
+  // Update window width on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className="relative w-full h-screen flex flex-col justify-center items-center bg-gray-900 text-white">
@@ -39,7 +52,6 @@ const HeroSection = ({ onScroll }: { onScroll: () => void }) => {
                 alt={imageArray[currentImageIndex].text}
                 width={600} // Adjust width for responsiveness
                 height={400} // Adjust height for responsiveness
-                
                 className="w-full h-full object-cover"
               />
             </div>
@@ -51,7 +63,7 @@ const HeroSection = ({ onScroll }: { onScroll: () => void }) => {
               </p>
             </div>
           }
-          gridSize={window.innerWidth < 768 ? 12 : 24} // Responsive pixel grid size
+          gridSize={windowWidth < 768 ? 12 : 24} // Responsive pixel grid size
           pixelColor="#ffffff"
           animationStepDuration={0.4}
           className="w-full h-full"

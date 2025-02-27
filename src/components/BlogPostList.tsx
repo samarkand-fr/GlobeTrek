@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";
@@ -10,7 +9,10 @@ const BlogPostList = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("BlogPostList mounted. Current router path:", window.location.pathname);
+    if (typeof window !== "undefined") {
+      // This code will run only on the client side
+      console.log("BlogPostList mounted. Current router path:", window.location.pathname);
+    }
   }, []);
 
   if (!blogPosts || blogPosts.length === 0) {

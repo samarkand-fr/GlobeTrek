@@ -196,9 +196,9 @@ const FallingText: React.FC<FallingTextProps> = ({
 
     const handleTrigger = () => {
         if (!effectStarted && (trigger === "click" || trigger === "hover")) {
-            setEffectStarted(true);
+          setEffectStarted(true);
         }
-    };
+      };
 
     return (
         <div

@@ -1,32 +1,32 @@
-
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 const ContentSection = () => {
   const contentRef = useRef<HTMLElement | null>(null); // Declare the ref for the section
 
   useEffect(() => {
-    const el = contentRef.current;
-    if (!el) return;
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 50 }, // Starting state (opacity 0 and 50px down)
-      {
-        opacity: 1, // Target opacity
-        y: 0, // Target y position (slide to the top)
-        scrollTrigger: {
-          trigger: el, // Element that triggers the animation
-          start: "top 80%", // Start animation when 80% of the element is visible in the viewport
-          end: "bottom 20%", // End animation when the element's bottom reaches 20% of the viewport
-          scrub: true, // Makes the animation linked to scroll position
-          markers: false, // Optional: Add for debugging scroll trigger markers
-        },
-      }
-    );
+      const el = contentRef.current;
+      if (!el) return;
+
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 50 }, // Starting state (opacity 0 and 50px down)
+        {
+          opacity: 1, // Target opacity
+          y: 0, // Target y position (slide to the top)
+          scrollTrigger: {
+            trigger: el, // Element that triggers the animation
+            start: "top 80%", // Start animation when 80% of the element is visible in the viewport
+            end: "bottom 20%", // End animation when the element's bottom reaches 20% of the viewport
+            scrub: true, // Makes the animation linked to scroll position
+            markers: false, // Optional: Add for debugging scroll trigger markers
+          },
+        }
+      );
+    }
   }, []);
 
   return (
